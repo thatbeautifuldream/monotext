@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MonoText for X | Unicode Monospace Text Generator</title>
+    <meta
+      name="description"
+      content="Convert plain text into Unicode monospace text for X posts, bios, replies, and developer-style content. Fast, clean, and paste-ready."
+    />
+    <meta
+      name="keywords"
+      content="X monospace text generator, Unicode monospace, X font generator, monospace text, Unicode text tool, paste-ready text"
+    />
+    <meta name="author" content="Milind Mishra" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="canonical" href="https://monotext.milind.app/" />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="MonoText for X | Unicode Monospace Text Generator"
+    />
+    <meta
+      property="og:description"
+      content="Convert plain text into Unicode monospace text for X posts, bios, replies, and developer-style content."
+    />
+    <meta property="og:url" content="https://monotext.milind.app/" />
+    <meta property="og:site_name" content="MonoText for X" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="MonoText for X | Unicode Monospace Text Generator"
+    />
+    <meta
+      name="twitter:description"
+      content="Convert plain text into Unicode monospace text for X posts, bios, replies, and developer-style content."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+        --font-mono:
+          "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+      }
+
+      body {
+        font-family: var(--font-sans);
+      }
+
+      .font-interface-mono {
+        font-family: var(--font-mono);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-black text-neutral-100">
+    <div
+      class="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8"
+    >
+      <header class="space-y-4">
+        <p
+          class="text-sm font-medium uppercase tracking-[0.28em] text-neutral-400"
+        >
+          MonoText Tool
+        </p>
+        <div class="space-y-3">
+          <h1
+            class="text-3xl font-medium tracking-tight text-neutral-100 sm:text-4xl lg:text-5xl"
+          >
+            MonoText for X
+          </h1>
+          <p class="max-w-3xl text-sm leading-7 text-neutral-400 sm:text-base">
+            Convert plain text into Unicode mathematical monospace characters
+            that you can paste into X. Unsupported characters are preserved
+            as-is, and combining marks stay attached correctly.
+          </p>
+        </div>
+      </header>
+
+      <main class="grid gap-6 lg:grid-cols-2">
+        <section
+          class="rounded-3xl border border-neutral-800 bg-neutral-950 p-6 shadow-2xl shadow-black/30"
+        >
+          <div class="space-y-5">
+            <div>
+              <label
+                for="input"
+                class="mb-2 block text-sm font-medium text-neutral-300"
+                >Normal text</label
+              >
+              <textarea
+                id="input"
+                rows="14"
+                placeholder="Make your next X post look terminal-clean and impossible to ignore."
+                class="font-interface-mono w-full rounded-2xl border border-neutral-800 bg-black px-4 py-3 text-sm text-neutral-100 outline-none transition focus:border-neutral-600 focus:ring-2 focus:ring-neutral-700"
+              >
+launching something new?
+turn your text into monospace and paste it straight into X</textarea
+              >
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <button
+                id="clearBtn"
+                class="rounded-2xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-sm font-semibold text-neutral-100 transition hover:border-neutral-600 hover:bg-neutral-900"
+                type="button"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="rounded-3xl border border-neutral-800 bg-neutral-950 p-6 shadow-2xl shadow-black/30"
+        >
+          <div class="mb-3 flex items-start justify-between gap-3">
+            <label
+              for="output"
+              class="block text-sm font-medium text-neutral-300"
+              >MonoText output</label
+            >
+            <div class="flex items-center gap-3">
+              <span
+                class="font-interface-mono rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-400"
+                >Paste-ready</span
+              >
+              <button
+                id="copyBtn"
+                class="rounded-full border border-neutral-800 px-3 py-1 text-xs font-medium text-neutral-300 transition hover:border-neutral-600 hover:bg-neutral-900 hover:text-neutral-100"
+                type="button"
+              >
+                Copy output
+              </button>
+            </div>
+          </div>
+          <textarea
+            id="output"
+            rows="14"
+            readonly
+            class="font-interface-mono w-full rounded-2xl border border-neutral-800 bg-black px-4 py-3 text-sm text-neutral-100 outline-none"
+          ></textarea>
+        </section>
+      </main>
+
+      <section
+        class="rounded-3xl border border-neutral-800 bg-neutral-950 p-6 text-sm leading-7 text-neutral-400"
+      >
+        <h2 class="mb-2 text-base font-semibold text-neutral-100">
+          How it works
+        </h2>
+        <p id="status">
+          This app converts only the characters that have an actual Unicode
+          monospace equivalent. It currently supports A–Z, a–z, and 0–9. Since
+          Unicode does not define monospace versions for every symbol or script,
+          unsupported characters are intentionally preserved instead of being
+          corrupted or replaced, so punctuation, emoji, symbols, CJK text,
+          Arabic, Hindi, accents, and line breaks stay safe.
+        </p>
+      </section>
+    </div>
+
+    <script>
+      const DEFAULT_STATUS =
+        "This app converts only the characters that have an actual Unicode monospace equivalent. It currently supports A–Z, a–z, and 0–9. Since Unicode does not define monospace versions for every symbol or script, unsupported characters are intentionally preserved instead of being corrupted or replaced, so punctuation, emoji, symbols, CJK text, Arabic, Hindi, accents, and line breaks stay safe.";
+
+      const input = document.getElementById("input");
+      const output = document.getElementById("output");
+      const status = document.getElementById("status");
+      const copyBtn = document.getElementById("copyBtn");
+      const clearBtn = document.getElementById("clearBtn");
+
+      const monospaceMap = new Map([
+        ["A", "𝙰"],
+        ["B", "𝙱"],
+        ["C", "𝙲"],
+        ["D", "𝙳"],
+        ["E", "𝙴"],
+        ["F", "𝙵"],
+        ["G", "𝙶"],
+        ["H", "𝙷"],
+        ["I", "𝙸"],
+        ["J", "𝙹"],
+        ["K", "𝙺"],
+        ["L", "𝙻"],
+        ["M", "𝙼"],
+        ["N", "𝙽"],
+        ["O", "𝙾"],
+        ["P", "𝙿"],
+        ["Q", "𝚀"],
+        ["R", "𝚁"],
+        ["S", "𝚂"],
+        ["T", "𝚃"],
+        ["U", "𝚄"],
+        ["V", "𝚅"],
+        ["W", "𝚆"],
+        ["X", "𝚇"],
+        ["Y", "𝚈"],
+        ["Z", "𝚉"],
+        ["a", "𝚊"],
+        ["b", "𝚋"],
+        ["c", "𝚌"],
+        ["d", "𝚍"],
+        ["e", "𝚎"],
+        ["f", "𝚏"],
+        ["g", "𝚐"],
+        ["h", "𝚑"],
+        ["i", "𝚒"],
+        ["j", "𝚓"],
+        ["k", "𝚔"],
+        ["l", "𝚕"],
+        ["m", "𝚖"],
+        ["n", "𝚗"],
+        ["o", "𝚘"],
+        ["p", "𝚙"],
+        ["q", "𝚚"],
+        ["r", "𝚛"],
+        ["s", "𝚜"],
+        ["t", "𝚝"],
+        ["u", "𝚞"],
+        ["v", "𝚟"],
+        ["w", "𝚠"],
+        ["x", "𝚡"],
+        ["y", "𝚢"],
+        ["z", "𝚣"],
+        ["0", "𝟶"],
+        ["1", "𝟷"],
+        ["2", "𝟸"],
+        ["3", "𝟹"],
+        ["4", "𝟺"],
+        ["5", "𝟻"],
+        ["6", "𝟼"],
+        ["7", "𝟽"],
+        ["8", "𝟾"],
+        ["9", "𝟿"],
+      ]);
+
+      const segmenter =
+        typeof Intl !== "undefined" && typeof Intl.Segmenter === "function"
+          ? new Intl.Segmenter(undefined, { granularity: "grapheme" })
+          : null;
+
+      function getGraphemes(text) {
+        if (segmenter) {
+          return Array.from(segmenter.segment(text), ({ segment }) => segment);
+        }
+        return Array.from(text);
+      }
+
+      function toMonospace(text) {
+        return getGraphemes(text)
+          .map((grapheme) => {
+            const chars = Array.from(grapheme);
+            const base = chars[0];
+            const rest = chars.slice(1);
+
+            if (!base) {
+              return grapheme;
+            }
+
+            const mappedBase = monospaceMap.get(base);
+            return mappedBase ? mappedBase + rest.join("") : grapheme;
+          })
+          .join("");
+      }
+
+      function getCharacterStats(text) {
+        const graphemes = getGraphemes(text);
+        let convertedCount = 0;
+
+        for (const grapheme of graphemes) {
+          const firstChar = Array.from(grapheme)[0];
+          if (firstChar && monospaceMap.has(firstChar)) {
+            convertedCount += 1;
+          }
+        }
+
+        return {
+          total: graphemes.length,
+          converted: convertedCount,
+          preserved: graphemes.length - convertedCount,
+        };
+      }
+
+      function updateOutput() {
+        const sourceText = input.value;
+        const converted = toMonospace(sourceText);
+        const stats = getCharacterStats(sourceText);
+
+        output.value = converted;
+
+        if (!sourceText) {
+          status.textContent = DEFAULT_STATUS;
+          return;
+        }
+
+        status.textContent = `Converted ${stats.converted} of ${stats.total} characters. Preserved ${stats.preserved} unsupported characters safely. This app converts only the characters that have an actual Unicode monospace equivalent, currently A–Z, a–z, and 0–9.`;
+      }
+
+      async function copyOutput() {
+        if (!output.value.trim()) {
+          status.textContent = "Nothing to copy yet.";
+          return;
+        }
+
+        try {
+          await navigator.clipboard.writeText(output.value);
+          status.textContent = "Copied to clipboard.";
+        } catch (error) {
+          status.textContent = "Copy failed. Please copy manually.";
+        }
+      }
+
+      function clearAll() {
+        input.value = "";
+        output.value = "";
+        status.textContent = DEFAULT_STATUS;
+      }
+
+      function runTests() {
+        const tests = [
+          {
+            name: "converts lowercase ascii",
+            actual: toMonospace("milind"),
+            expected: "𝚖𝚒𝚕𝚒𝚗𝚍",
+          },
+          {
+            name: "converts mixed letters and digits",
+            actual: toMonospace("Tailwind 100"),
+            expected: "𝚃𝚊𝚒𝚕𝚠𝚒𝚗𝚍 𝟷𝟶𝟶",
+          },
+          {
+            name: "preserves punctuation",
+            actual: toMonospace("rotate-x-40 blur-lg"),
+            expected: "𝚛𝚘𝚝𝚊𝚝𝚎-𝚡-𝟺𝟶 𝚋𝚕𝚞𝚛-𝚕𝚐",
+          },
+          {
+            name: "preserves emoji and non latin text",
+            actual: toMonospace("Hello 😎 नमस्ते"),
+            expected: "𝙷𝚎𝚕𝚕𝚘 😎 नमस्ते",
+          },
+          {
+            name: "preserves combining marks",
+            actual: toMonospace("Cafe\u0301"),
+            expected: "𝙲𝚊𝚏𝚎\u0301",
+          },
+        ];
+
+        for (const test of tests) {
+          console.assert(
+            test.actual === test.expected,
+            `${test.name} failed. Expected "${test.expected}" but got "${test.actual}".`,
+          );
+        }
+      }
+
+      copyBtn.addEventListener("click", copyOutput);
+      clearBtn.addEventListener("click", clearAll);
+      input.addEventListener("input", updateOutput);
+
+      runTests();
+      updateOutput();
+    </script>
+  </body>
+</html>
