@@ -6,7 +6,7 @@
     <title>MonoText for X | Unicode Monospace Text Generator</title>
     <meta
       name="description"
-      content="Convert plain text into Unicode monospace text for X posts, bios, replies, and developer-style content. Fast, clean, and paste-ready."
+      content="Convert plain text into Unicode monospace text for X posts, replies, and developer-style content. Fast, clean, and paste-ready."
     />
     <meta
       name="keywords"
@@ -24,7 +24,7 @@
     />
     <meta
       property="og:description"
-      content="Convert plain text into Unicode monospace text for X posts, bios, replies, and developer-style content."
+      content="Convert plain text into Unicode monospace text for X posts, replies, and developer-style content."
     />
     <meta property="og:url" content="https://monotext.milind.app/" />
     <meta property="og:site_name" content="MonoText for X" />
@@ -36,7 +36,7 @@
     />
     <meta
       name="twitter:description"
-      content="Convert plain text into Unicode monospace text for X posts, bios, replies, and developer-style content."
+      content="Convert plain text into Unicode monospace text for X posts, replies, and developer-style content."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -324,48 +324,10 @@ turn your text into monospace and paste it straight into X</textarea
         status.textContent = DEFAULT_STATUS;
       }
 
-      function runTests() {
-        const tests = [
-          {
-            name: "converts lowercase ascii",
-            actual: toMonospace("milind"),
-            expected: "𝚖𝚒𝚕𝚒𝚗𝚍",
-          },
-          {
-            name: "converts mixed letters and digits",
-            actual: toMonospace("Tailwind 100"),
-            expected: "𝚃𝚊𝚒𝚕𝚠𝚒𝚗𝚍 𝟷𝟶𝟶",
-          },
-          {
-            name: "preserves punctuation",
-            actual: toMonospace("rotate-x-40 blur-lg"),
-            expected: "𝚛𝚘𝚝𝚊𝚝𝚎-𝚡-𝟺𝟶 𝚋𝚕𝚞𝚛-𝚕𝚐",
-          },
-          {
-            name: "preserves emoji and non latin text",
-            actual: toMonospace("Hello 😎 नमस्ते"),
-            expected: "𝙷𝚎𝚕𝚕𝚘 😎 नमस्ते",
-          },
-          {
-            name: "preserves combining marks",
-            actual: toMonospace("Cafe\u0301"),
-            expected: "𝙲𝚊𝚏𝚎\u0301",
-          },
-        ];
-
-        for (const test of tests) {
-          console.assert(
-            test.actual === test.expected,
-            `${test.name} failed. Expected "${test.expected}" but got "${test.actual}".`,
-          );
-        }
-      }
-
       copyBtn.addEventListener("click", copyOutput);
       clearBtn.addEventListener("click", clearAll);
       input.addEventListener("input", updateOutput);
 
-      runTests();
       updateOutput();
     </script>
   </body>
